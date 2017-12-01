@@ -9,7 +9,7 @@ describe('Callbacks', () => {
   it('should upload images folder correctly', (done) => {
     callbacks.uploadFolder('./images', (err, numberOfFiles) => {
       expect(err).to.equal(null)
-      numberOfFiles.should.eql(5)
+      numberOfFiles.should.eql(4)
       done();
     })
   });
