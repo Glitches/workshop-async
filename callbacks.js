@@ -18,8 +18,8 @@ const uploadFolder = function (source, cb) {
 }
 
 const uploadFile = function (filename, fileIndex,source, fileQueue, cb, files) {
-  let callBack = cb;
-  console.log(cb.pop());
+  // let callBack = cb;
+  // console.log(cb.pop());
   const filePath = source + '/' + filename
   // Uploading the file
    fileQueue.push(filePath)
@@ -28,7 +28,9 @@ const uploadFile = function (filename, fileIndex,source, fileQueue, cb, files) {
       console.log('Error reading file: ' + err)
     } else {
       // Simulating file upload
-      setTimeout( uploadFileContents(filename, fileIndex, source, fileQueue, callBack, files, filePath), 1000);
+      setTimeout(() =>{
+        return uploadFileContents(filename, fileIndex, source, fileQueue, cb, files, filePath)
+      }, 1000);
       // }, 1000)
     }
   })

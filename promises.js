@@ -1,8 +1,9 @@
+
 'use strict';
 
 const fs = require('fs');
 
-exports.uploadFolder = (source, cb) => {
+const uploadFolder = function (source, cb) {
     fs.readdir(source, function (err, files) {
         if (err) {
             cb('Error finding files: ' + err)
@@ -16,8 +17,9 @@ exports.uploadFolder = (source, cb) => {
     })
 }
 
-const uploadFile = (filename, fileIndex, source, fileQueue, cb, files) => {
-    const ourPromise = new Promise (res, rej)
+const uploadFile = function (filename, fileIndex, source, fileQueue, cb, files) {
+    // let callBack = cb;
+    // console.log(cb.pop());
     const filePath = source + '/' + filename
     // Uploading the file
     fileQueue.push(filePath)
@@ -27,11 +29,22 @@ const uploadFile = (filename, fileIndex, source, fileQueue, cb, files) => {
         } else {
             // Simulating file upload
             setTimeout(() => {
-                fileQueue.splice(fileQueue.indexOf(filePath), 1);
-                if (fileQueue.length === 0) {
-                    cb(null, files.length)
-                }
-            }, 1000)
+                return uploadFileContents(filename, fileIndex, source, fileQueue, cb, files, filePath)
+            }, 1000);
+            // }, 1000)
         }
     })
 }
+
+
+const uploadFileContents = function (filename, fileIndex, source, fileQueue, cb, files, filePath) {
+    fileQueue.splice(fileQueue.indexOf(filePath), 1);
+    if (fileQueue.length === 0) {
+        cb(null, files.length)
+    }
+}
+
+
+exports.uploadFolder = uploadFolder;
+exports.uploadFile = uploadFile;
+exports.uploadFileContents = uploadFileContents;

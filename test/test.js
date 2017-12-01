@@ -38,7 +38,7 @@ describe('Callback refactor',  () =>{
   it('should upload images folder correctly', (done) => {
     callbacks.uploadFolder('./images', (err, numberOfFiles) => {
       expect(err).to.equal(null)
-      numberOfFiles.should.eql(5)
+      numberOfFiles.should.eql(4)
       done();
     })
   });
@@ -91,7 +91,7 @@ describe('Promises refactor',  () => {
     promises.uploadFolder('./images')
     .then(numberOfFiles => {
       expect(err).to.equal(null)
-      numberOfFiles.should.eql(5)
+      numberOfFiles.should.eql(4)
       done();
     })
     .catch(err => {
@@ -151,7 +151,7 @@ describe('Promises refactor',  () => {
     asyncawait.uploadFolder('./images')
     .then(numberOfFiles => {
       expect(err).to.equal(null)
-      numberOfFiles.should.eql(5)
+      numberOfFiles.should.eql(4)
       done();
     })
     .catch(err => {
